@@ -1,4 +1,4 @@
-# OpenWeatherMap - Compose Client
+# Spoonacular - Compose Client
 
 ## Android
 - Kotlin
