@@ -6,9 +6,12 @@
 - Hilt
 - Coroutines
 - Flow 
-- Retrofit
+- Retrofit 
 - OkHttp
+- Room db
 - Coil
+- Navigation Component
+- MVVM
 - MutableStateFlow
 - Repository pattern
 - SOLID
@@ -21,3 +24,4 @@
 ![alt text](./images/img_4.png)
 ![alt text](./images/img_6.png)
 ![alt text](./images/img_5.png)
+![alt text](./images/img_7.png)

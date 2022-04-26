@@ -1,14 +1,12 @@
-package com.mclowicz.recipes.presentation.main
+package com.mclowicz.recipes.presentation.favorite
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,12 +20,14 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.mclowicz.recipes.R
 import com.mclowicz.recipes.data.model.RecipeResult
+import com.mclowicz.recipes.data.model.RecipeViewModel
 
 @ExperimentalCoilApi
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun RecipeCardUI(
-    data: RecipeResult
+fun FavoriteCardUI(
+    data: RecipeViewModel,
+    onRemoveFavoriteClicked: (RecipeViewModel) -> Unit
 ) {
     val painter = rememberImagePainter(data = data.image) {
         placeholder(R.drawable.ic_launcher_background)
@@ -72,12 +72,17 @@ fun RecipeCardUI(
                     modifier = Modifier.weight(0.2f).padding(top = 16.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Icon(
-                        Icons.Default.Favorite,
-                        "favorite",
-                        tint = Color.Gray,
-                        modifier = Modifier.alpha(0.5f)
-                    )
+                    IconButton(onClick = {
+                        onRemoveFavoriteClicked(data)
+                    }) {
+                        Icon(
+                            Icons.Default.Delete,
+                            "delete",
+                            tint = Color.Red,
+                            modifier = Modifier.alpha(0.5f),
+
+                            )
+                    }
                 }
             }
         }

@@ -1,36 +1,43 @@
 package com.mclowicz.recipes.presentation.main
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
-import com.mclowicz.recipes.MainViewModel
-import com.mclowicz.recipes.presentation.common.ErrorUI
-import com.mclowicz.recipes.presentation.common.LoadingUI
+import com.example.navigationcompose.presentation.common.BottomNavBar
+import com.mclowicz.recipes.navigation.SetupNavGraph
 
 @ExperimentalCoilApi
+@ExperimentalAnimationApi
 @Composable
-fun MainScreen(
-    mainViewModel: MainViewModel = hiltViewModel()
-) {
-    val viewState = mainViewModel.viewState.collectAsState().value
-    val cuisine = "Nordic"
-    when (viewState) {
-        is MainVieState.Idle -> {
-            MainIdleUI(
-                fetchByCuisine = {
-                    mainViewModel.fetchRecipeByCuisine(cuisine)
+fun MainScreen() {
+    val navController = rememberNavController()
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
+    ) {
+        Scaffold(
+            bottomBar = {
+                AnimatedVisibility(
+                    visible = true,
+                    enter = expandVertically(),
+                    exit = shrinkVertically()
+                ) {
+                    BottomNavBar(navController = navController)
                 }
+            }
+        ) {
+            SetupNavGraph(
+                navHostController = navController
             )
-        }
-        is MainVieState.Loading -> {
-            LoadingUI()
-        }
-        is MainVieState.Error -> {
-            ErrorUI(exception = viewState.exception)
-        }
-        is MainVieState.Success -> {
-            MainContentUI(data = viewState.data)
         }
     }
 }

@@ -3,7 +3,7 @@ package com.mclowicz.recipes.viewModel
 import com.mclowicz.recipes.data.exceptions.Exception
 import com.mclowicz.recipes.data.model.RecipeResults
 import com.mclowicz.recipes.data.repository.RecipeRepository
-import com.mclowicz.recipes.presentation.main.MainVieState
+import com.mclowicz.recipes.presentation.main.RecipesViewState
 import com.mclowicz.recipes.utils.BaseUnitTest
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
@@ -17,10 +17,10 @@ import org.junit.Test
 @ExperimentalCoroutinesApi
 class RecipeViewModelShould : BaseUnitTest() {
 
-    private val loadingState = MainVieState.Loading
-    private val emptyStateException = MainVieState.Error(Exception.EmptyException())
-    private val unauthorizedException = MainVieState.Error(Exception.UnauthorizedException())
-    private val serverException = MainVieState.Error(Exception.ServerException())
+    private val loadingState = RecipesViewState.Loading
+    private val emptyStateException = RecipesViewState.Error(Exception.EmptyException())
+    private val unauthorizedException = RecipesViewState.Error(Exception.UnauthorizedException())
+    private val serverException = RecipesViewState.Error(Exception.ServerException())
 
     private val recipeRepository: RecipeRepository = mock()
 

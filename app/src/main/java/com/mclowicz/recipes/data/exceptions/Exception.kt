@@ -1,6 +1,5 @@
 package com.mclowicz.recipes.data.exceptions
 
-import android.util.Log
 import retrofit2.HttpException
 import java.net.ConnectException
 
